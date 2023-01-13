@@ -1,0 +1,40 @@
+{% extends "model-page.html" %}
+
+{% block content %}
+    <h1 class="text-center">Cadastre o seu PET SHOP</h1>
+
+    <form enctype="multipart/form-data"action="submit", method="POST">{% csrf_token %}
+        <input type="number" class="form-control" name="pet-id" value="{{pet.id}}" hidden>
+       <div class="container">
+           <div class="form-group">
+               <label for="email">E-mail</label>
+               <input class="form-control" name="email"type="text"value="{{pet.email}}">
+           </div>
+           <div class="form-group">
+               <label for="phone">Telefone:</label>
+               <input class="form-control" name="phone"type="text" value="{{pet.phone}}">
+          </div>
+          <div class="form-group">
+              <label for="city">Endereço:</label>
+              <input class="form-control" name="city"type="text" value="{{pet.city}}">
+          </div>
+          
+          <div class="form-group">
+              <label for="description">Descrição da sua empresa</label>
+              <textarea class="form-control" rows="5" name= "description"{{pet.description}}></textarea>
+          </div>
+          <div class="form-group">
+              <a href="/media/{{pet.photo}}" target="_blank">Foto atual</a>
+              <input type="file" class"form-control-file border" name="file" accept="image/*">
+          </div>
+          <button type="submit" class="btn btn-primary">
+             {%if pet%}
+                ALTERAR
+             {%else%}
+                Cadastrar
+             {%endif%}
+        </button>
+    </div>
+</form>
+
+{% endblock %}

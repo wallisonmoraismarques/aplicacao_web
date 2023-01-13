@@ -1,0 +1,54 @@
+{% extends 'model-page.html' %}
+
+{% block content %}
+
+<h1 class="text-center"><i>Tudo sobre a Empresa<i></h1>
+
+<!-- ini Modal -->
+<div class="modal fade" id="modal_confirm">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Deseja realmente excluir</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body text-right">
+                <a href="/pet/delete/{{ pet.id }}/">
+                    <button type="button" class="btn btn-danger">
+                        Excluir
+                    </buton>
+                </a>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        Cancelar
+                    </button>
+            </div>
+        </div>
+    </div>        
+</div>
+
+<div class="container mp-4 mb-2">
+    <div>
+        <div class="col-sm-4">
+            <div style="border-color:white; border-style:solid; width:356px; height:300px;">
+                <img src="{{pet.photo.url}}" width="1000" height="263" style="margin-top:14px">
+            </div>
+        </div>
+        <div>
+            <p>{{pet.description}}</p>
+            <h4>Contado</h4>
+            <p><b> Telefone.: </b>{{ pet.phone}}</p>
+            <p><b>E-mail:</b> {{pet.email}}</p>
+            {% if request.user == pet.user %}
+                <a href="/pet/register/?id={{ pet.id }}">
+                    <button type="button" class="btn btn-primary">ALTERAR</button>
+                </a>
+               
+                <button type="button" class="btn btn-danger" data-toggle="modal"
+                        data-target="#modal_confirm">Excluir</button>
+                        <button type="button" class="btn btn-danger" value="Gerar PDF" onclick="window.print()">
+                            GERAR PDF</button>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock  %}
